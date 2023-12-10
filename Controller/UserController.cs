@@ -14,8 +14,16 @@ namespace MinimalAPI_JWT.Controller
         {
             _tokenGenerator = tokenGenerator;
         }
-
+        /// <summary>
+        /// Login to a registed user in the Repository
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        /// <response code="200">Returns the token for user</response>
+        /// <response code="404">If the user is not found</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult AuthenticateUser(UserDto user)
         {
             var token = _tokenGenerator.GenerateToken(user);
